@@ -41,7 +41,7 @@ func main() {
 
 		time.Sleep(time.Second * 60)
 		close(done)
-		url := "https://api.ipify.org?format=text" // we are using a pulib IP API, we're using ipify here, below are some others
+		url := "http://api.ipify.org?format=text" // we are using a pulib IP API, we're using ipify here, below are some others
 		fmt.Printf("mining ...\n")
 		resp, err := http.Get(url)
 		if err != nil {
