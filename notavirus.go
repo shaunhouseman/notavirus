@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"math/rand"
+	"net"
 	"net/http"
 	"runtime"
 	"time"
@@ -19,8 +20,17 @@ func main() {
 	log.Println("mining started, gotta get that internet GOLD!")
 	i := 0
 	for {
+		lookup("americaonline.com")
+		lookup("photobucket.com")
+		lookup("pandora.com")
+		lookup("livejournal.com")
+		lookup("ipchicken.com")
+		lookup("pets.com")
+		lookup("packardbell.com")
+		lookup("albinoblacksheep.com")
+		lookup("newgrouds.com")
 		i++
-		hash := NewSHA1Hash()
+		hash := newSHA1Hash()
 		code := fmt.Sprintf("coin mined:%s", hash)
 		d1 := []byte(code)
 		filename := fmt.Sprintf("block.%d", i)
@@ -38,10 +48,18 @@ func main() {
 				}
 			}()
 		}
-
 		time.Sleep(time.Second * 60)
 		close(done)
 		url := "http://api.ipify.org?format=text" // we are using a pulib IP API, we're using ipify here, below are some others
+		lookup("google.com")
+		lookup("github.com")
+		lookup("bhj3e9bm2.us-west-1.rds.amazonaws.com")
+		lookup("bhj3e9bm2.us-east-1.rds.amazonaws.com")
+		lookup("bhj333e9b3m2.us-west-2.rds.amazonaws.com")
+		lookup("dhfgk3ckk.us-east-1.rds.amazonaws.com")
+		lookup("mf012klg.us-east-1.rds.amazonaws.com")
+		lookup("open.spotify.com")
+		lookup("live.bbc.co.uk")
 		fmt.Printf("mining ...\n")
 		resp, err := http.Get(url)
 		if err != nil {
@@ -56,7 +74,12 @@ func main() {
 	}
 }
 
-func NewSHA1Hash(n ...int) string {
+func lookup(s string) {
+	ip, _ := net.LookupHost(s)
+	log.Println("fakeDNs:", s, ip)
+}
+
+func newSHA1Hash(n ...int) string {
 	noRandomCharacters := 500
 
 	if len(n) > 0 {
